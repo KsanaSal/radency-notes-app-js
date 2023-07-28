@@ -20,28 +20,24 @@ const generateTableRows = () => {
         });
 
         const rowHtml = `
-      <tr class="flex justify-between items-center text-left py-2 px-4 bg-white border border-teal-500 rounded-md overflow-hidden shadow-sm hover:shadow-md">
-        <td class="w-[60px] shrink-0 overflow-ellipsis whitespace-nowrap overflow-hidden">
+      <tr class="flex justify-between items-center text-left py-2 px-2 bg-white border border-teal-500 rounded-md overflow-hidden shadow-sm hover:shadow-md">
+        <td class="w-[55px] shrink-0 overflow-ellipsis whitespace-nowrap overflow-hidden">
         <div class="bg-teal-300 p-2 rounded-full flex justify-center w-[50px] h-[50px]">
           <img src="${category.categoryImg}" alt="${
             category.categoryName
         }" width="20" height="20"/>
         </div>
         </td>
-        <td class="w-[130px] shrink-0 text-gray-800 font-semibold">${
+        <td class="w-[120px] shrink-0 text-gray-800 text-[18px] font-semibold">${
             item.nameTitle
         }</td>
-        <td class="w-[150px] shrink-0">${date}</td>
-        <td class="w-[100px] shrink-0">${categoryName}</td>
-        <td class="w-[120px] shrink-0">${content}</td>
-        <td class="w-[175px] shrink-0">
-          <div class="flex flex-row gap-[5px]">
-            <div class="text-secondary-80 bg-tertiary-30 text-center rounded-md px-[14px] py-[1px]">
+        <td class="w-[135px] shrink-0">${date}</td>
+        <td class="w-[130px] shrink-0">${categoryName}</td>
+        <td class="w-[170px] shrink-0">${content}</td>
+        <td class="w-[130px] shrink-0">
               ${item.modificationDate.join(", ")}
-            </div>
-          </div>
         </td>
-        <td class="flex gap-5  w-[135px] shrink-0">
+        <td class="flex gap-5  w-[130px] shrink-0">
             <div class="flex gap-2">
                 <button class="hover:shadow-md p-2 hover:bg-teal-100 rounded-[4px]">
                     <img src=${iconEdit} alt="Icon edit" width="20" height="20"/>
@@ -78,18 +74,21 @@ const tableActiveList = /*html*/ `
     mt-4
   '>
     <thead>
-      <tr class=" flex justify-between text-left text-[18px] font-semibold py-2 px-4 bg-teal-200 border border-teal-700 rounded-[4px] overflow-hidden shadow-sm hover:shadow-md">
-        <th class="w-[60px] shrink-0">Images</th>
+      <tr class=" flex justify-between text-left text-[20px] font-semibold py-4 px-2 bg-teal-200 border border-teal-700 rounded-[4px] overflow-hidden shadow-sm hover:shadow-md">
+        <th class="w-[55px] shrink-0"></th>
         <th class="w-[130px] shrink-0">Name</th>
-        <th class="w-[150px] shrink-0">Created</th>
-        <th class="w-[100px] shrink-0">Category</th>
-        <th class="w-[120px] shrink-0">Content</th>
-        <th class="w-[175px] shrink-0">Dates</th>
-        <th class="w-[135px] shrink-0">
-            <div class="flex gap-2">
-                <img src=${iconEdit} alt="Icon edit" width="20" height="20"/>
-                <img src=${iconArchive} alt="Icon archive" width="20" height="20"/>
-                <img src=${iconDelete} alt="Icon delete" width="20" height="20"/>
+        <th class="w-[135px] shrink-0">Created</th>
+        <th class="w-[130px] shrink-0">Category</th>
+        <th class="w-[175px] shrink-0">Content</th>
+        <th class="w-[130px] shrink-0">Dates</th>
+        <th class="w-[130px] shrink-0">
+            <div class="flex gap-2 justify-end">
+                <div class="p-2">
+                    <img src=${iconArchive} alt="Icon archive" width="20" height="20"/>
+                </div>
+                <div class="p-2">
+                    <img src=${iconDelete} alt="Icon delete" width="20" height="20"/>
+                </div>
             </div>
         </th>
       </tr>
