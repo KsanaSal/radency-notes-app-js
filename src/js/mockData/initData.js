@@ -1,8 +1,13 @@
+import iconListCheck from "../../images/icon-list-check.svg";
+import iconIdea from "../../images/icon-idea.svg";
+import iconRandomThought from "../../images/icon-random-thought.svg";
+import iconQuote from "../../images/icon-quote.svg";
+
 const initData = [
     {
         categoryId: "1",
         categoryName: "Task",
-        categoryImg: require(`../../images/icon-list-check.svg`),
+        categoryImg: iconListCheck,
         createDate: "July 29, 2023",
         content:
             "Bread, milk, tomatoes, eggplants, yogurt, ice cream, chocolate",
@@ -15,7 +20,7 @@ const initData = [
     {
         categoryId: "1",
         categoryName: "Task",
-        categoryImg: require(`../../images/icon-list-check.svg`),
+        categoryImg: iconListCheck,
         createDate: "August 08, 2023",
         content: "Move the trip to the theater from 08.08.2023 to 08.12.2023",
         nameTitle: "Theater",
@@ -27,7 +32,7 @@ const initData = [
     {
         categoryId: "1",
         categoryName: "Task",
-        categoryImg: require(`../../images/icon-list-check.svg`),
+        categoryImg: iconListCheck,
         createDate: "July 31, 2023",
         content: "The start learn a new programme Angular",
         nameTitle: "Books",
@@ -39,7 +44,7 @@ const initData = [
     {
         categoryId: "3",
         categoryName: "Idea",
-        categoryImg: require(`../../images/icon-idea.svg`),
+        categoryImg: iconIdea,
         createDate: "August 1, 2024",
         content: "I am implementing a new artistic wall painting",
         nameTitle: "New features",
@@ -51,7 +56,7 @@ const initData = [
     {
         categoryId: "1",
         categoryName: "Task",
-        categoryImg: require(`../../images/icon-list-check.svg`),
+        categoryImg: iconListCheck,
         createDate: "August 08, 2023",
         content:
             "The planned trip to Prague is postponed from 09.25.2023 to 12.23.2023",
@@ -64,7 +69,7 @@ const initData = [
     {
         categoryId: "1",
         categoryName: "Task",
-        categoryImg: require(`../../images/icon-list-check.svg`),
+        categoryImg: iconListCheck,
         createDate: "July 25, 2023",
         content:
             "Wine, bread, sausage, cheese, cookies, tomatoes, cucumbers, cabbage, meat, cake, coffee, tea, sour cream",
@@ -77,7 +82,7 @@ const initData = [
     {
         categoryId: "2",
         categoryName: "Random Thought",
-        categoryImg: require(`../../images/icon-random-thought.svg`),
+        categoryImg: iconRandomThought,
         createDate: "July 27, 2023",
         content:
             "The theory of evolution about the origin of humans from aliens",
@@ -90,7 +95,7 @@ const initData = [
     {
         categoryId: "4",
         categoryName: "Quote",
-        categoryImg: require(`../../images/icon-quote.svg`),
+        categoryImg: iconQuote,
         createDate: "June 27, 2023",
         content:
             "Here comes 40. I'm feeling my age and I've ordered the Ferrari. I'm going to get the whole mid-life crisis package.",
@@ -103,7 +108,7 @@ const initData = [
     {
         categoryId: "1",
         categoryName: "Task",
-        categoryImg: require(`../../images/icon-list-check.svg`),
+        categoryImg: iconListCheck,
         createDate: "July 29, 2023",
         content: "Dentist appointment postponed from 07/29/2023 to 08/02/2023",
         nameTitle: "Dentist",
@@ -115,7 +120,7 @@ const initData = [
     {
         categoryId: "3",
         categoryName: "Idea",
-        categoryImg: require(`../../images/icon-idea.svg`),
+        categoryImg: iconQuote,
         createDate: "September 1, 2023",
         content:
             "Change hairstyle and hair color. Add new accessories to your wardrobe.",
