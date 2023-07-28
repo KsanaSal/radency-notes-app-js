@@ -1,7 +1,7 @@
 const activeList = document.createElement("section");
-activeList.classList.add("text-black-600");
+activeList.classList.add("text-gray-800", "w-full");
 const tableActiveList = /*html*/ `
-<h1 class="text-[40px]">Active list</h1>
+<h1 class="text-[40px] font-bold">Active list</h1>
 <table
             class=' relative
             flex
@@ -9,12 +9,14 @@ const tableActiveList = /*html*/ `
             rounded-md
             text-description
             gap-[10px]
-            text-s-regular
+            text-base
+            font-normal
+            mt-4
             '
         >
             <thead>
                 <tr
-                    class=" flex justify-between text-left py-2 px-4 bg-teal-200 border border-teal-700 rounded-[4px] overflow-hidden shadow-sm hover:shadow-md"
+                    class=" flex justify-between text-left text-[18px] font-semibold py-2 px-4 bg-teal-200 border border-teal-700 rounded-[4px] overflow-hidden shadow-sm hover:shadow-md"
                 >
                     <th class="w-[60px] shrink-0">Images</th>
                     <th class="w-[130px] shrink-0">Name</th>
@@ -25,16 +27,16 @@ const tableActiveList = /*html*/ `
                     <th class="w-[135px] shrink-0">Icons</th>
                 </tr>
             </thead>
-            <tbody class=" flex flex-col gap-[10px]">
+            <tbody class=" flex flex-col gap-[10px] text-gray-600">
                 <tr
-                    class="flex justify-between items-center  text-secondary-80 text-left  py-2 px-4 bg-white border border-teal-500 rounded-md overflow-hidden shadow-sm hover:shadow-md"
+                    class="flex justify-between items-center text-left  py-2 px-4 bg-white border border-teal-500 rounded-md overflow-hidden shadow-sm hover:shadow-md"
                 >
                     <td
                         class="w-[60px] shrink-0 overflow-ellipsis whitespace-nowrap overflow-hidden"
                     >
                         images
                     </td>
-                    <td class="w-[130px] shrink-0">Shopping list</td>
+                    <td class="w-[130px] shrink-0 text-gray-800 font-semibold">Shopping list</td>
                     <td class="w-[150px] shrink-0">
                         date
                     </td>
@@ -57,7 +59,9 @@ const tableActiveList = /*html*/ `
                     </td>
                 </tr>
             </tbody>
-        </table>`;
+        </table>
+        <button class="text-gray-800 font-bold text-[18px] border-2 px-3 py-1 rounded-lg border-teal-800 bg-teal-200 hover:bg-teal-800 hover:text-white block mt-4 ml-auto">Create Note</button>
+        `;
 activeList.innerHTML = tableActiveList;
 
 export default activeList;
