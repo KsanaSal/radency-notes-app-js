@@ -3,7 +3,7 @@ import categories from "../mockData/categories";
 import emitter from "../../utils/eventEmitter";
 
 const handleCreateNoteBtnClick = () => {
-    const modalHtml = /*html*/ `
+    const modalHtml = `
         <div class="fixed inset-0 z-10 flex justify-center items-center bg-opacity-50 bg-gray-900">
           <div class="bg-teal-50 p-8 rounded-lg w-[500px] text-gray-800">
             <h2 class="text-[30px] font-bold mb-4 text-center">Create New Note</h2>
@@ -49,7 +49,6 @@ const handleCreateNoteBtnClick = () => {
     createNoteForm.addEventListener("submit", (e) => {
         e.preventDefault();
         const formData = new FormData(createNoteForm);
-        console.log(formData);
         const newNote = {
             categoryId: formData.get("noteCategory"),
             categoryName: categories.find(
