@@ -1,6 +1,6 @@
 import initData from "../mockData/initData";
 import categories from "../mockData/categories";
-import emitter from "../eventEmitter";
+import emitter from "../../utils/eventEmitter";
 
 const countNotesCategory = (categoryId, archived) =>
     initData.filter(

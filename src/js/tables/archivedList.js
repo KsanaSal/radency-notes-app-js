@@ -1,7 +1,7 @@
 import initData from "../mockData/initData";
 import categories from "../mockData/categories";
 import iconUnarchive from "../../images/icon-unarchived.svg";
-import emitter from "../eventEmitter";
+import emitter from "../../utils/eventEmitter";
 
 let renderedData = initData.filter((item) => item.archived);
 
@@ -46,12 +46,12 @@ const generateTableRows = () => {
         }" width="20" height="20"/>
         </div>
         </td>
-        <td class="w-[120px] shrink-0 text-gray-800 text-[18px] font-semibold">${
+        <td class="w-[120px] shrink-0 text-gray-800 text-[18px] font-semibold truncate text-ellipsis white-space: nowrap">${
             item.nameTitle
         }</td>
         <td class="w-[140px] shrink-0">${date}</td>
         <td class="w-[130px] shrink-0">${categoryName}</td>
-        <td class="w-[250px] shrink-0">${content}</td>
+        <td class="w-[250px] shrink-0 truncate text-ellipsis white-space: nowrap">${content}</td>
         <td class="w-[130px] shrink-0">
               ${item.modificationDate.join(", ")}
         </td>

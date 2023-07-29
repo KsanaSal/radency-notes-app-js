@@ -3,7 +3,8 @@ import categories from "../mockData/categories";
 import iconDelete from "../../images/icon-delete.svg";
 import iconArchive from "../../images/icon-archived.svg";
 import iconEdit from "../../images/icon-edit.svg";
-import emitter from "../eventEmitter";
+import emitter from "../../utils/eventEmitter";
+import parseDate from "../../utils/parseDate";
 
 let renderedData = initData.filter((item) => !item.archived);
 
@@ -33,6 +34,89 @@ const handleDeleteBtnClick = (recordId) => {
         initData.splice(itemDeleteByIndex, 1);
         emitter.emit("dataChanged");
     }
+};
+
+const handleCreateNoteBtnClick = () => {
+    const modalHtml = /*html*/ `
+        <div class="fixed inset-0 z-10 flex justify-center items-center bg-opacity-50 bg-gray-900">
+          <div class="bg-teal-50 p-8 rounded-lg w-[500px] text-gray-800">
+            <h2 class="text-[30px] font-bold mb-4 text-center">Create New Note</h2>
+            <form id="createNoteForm">
+              <div class="mb-4">
+                <label for="noteTitle" class="block font-semibold text-[20px]">Title:</label>
+                <input type="text" id="noteTitle" name="noteTitle" class="w-full text-[18px] border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-teal-500" required />
+              </div>
+              <div class="mb-4">
+                <label for="noteCategory" class="block font-semibold text-[20px]">Category:</label>
+                <select id="noteCategory" name="noteCategory" class="w-full text-[18px] text-teal-800 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-teal-500" required>
+                  <option value="" disabled selected>Select a category...</option>
+                  ${categories
+                      .map(
+                          (category) =>
+                              `<option value="${category.categoryId}">${category.categoryName}</option>`
+                      )
+                      .join("")}
+                </select>
+              </div>
+              <div class="mb-4">
+                <label for="noteContent" class="block font-semibold text-[20px]">Content:</label>
+                <textarea id="noteContent" name="noteContent" rows="4" class="w-full text-[18px] border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-teal-500" required></textarea>
+              </div>
+              <div class="flex justify-end">
+                <button type="button" id="cancelCreateNote" class=" text-teal-500 text-[18px] hover:text-teal-800 border-teal-800 border-2 px-4 py-2 rounded-md mr-3 bg-white hover:bg-teal-100">Cancel</button>
+                <button type="submit" class="text-white text-[18px] bg-teal-500 border-teal-800 border-2 px-4 py-2 rounded-md ml-3 hover:bg-teal-100 hover:text-teal-800">Create</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      `;
+
+    const modalContainer = document.createElement("div");
+    modalContainer.innerHTML = modalHtml;
+    document.body.appendChild(modalContainer);
+
+    const closeModal = () => {
+        modalContainer.remove();
+    };
+
+    const createNoteForm = modalContainer.querySelector("#createNoteForm");
+    createNoteForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formData = new FormData(createNoteForm);
+        console.log(formData);
+        const newNote = {
+            categoryId: formData.get("noteCategory"),
+            categoryName: categories.find(
+                (category) =>
+                    category.categoryId === formData.get("noteCategory")
+            ).categoryName,
+            categoryImg: categories.find(
+                (category) =>
+                    category.categoryId === formData.get("noteCategory")
+            ).categoryImg,
+            createDate: new Date().toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+            }),
+            content: formData.get("noteContent"),
+            nameTitle: formData.get("noteTitle"),
+            mode: "add",
+            recordId: String(Date.now()),
+            modificationDate: [],
+            archived: false,
+        };
+
+        initData.push(newNote);
+        emitter.emit("dataChanged");
+        closeModal();
+    });
+
+    const cancelCreateNoteBtn =
+        modalContainer.querySelector("#cancelCreateNote");
+    cancelCreateNoteBtn.addEventListener("click", () => {
+        closeModal();
+    });
 };
 
 const handleBtnClick = (e) => {
@@ -73,14 +157,14 @@ const generateTableRows = () => {
         }" width="20" height="20"/>
         </div>
         </td>
-        <td class="w-[120px] shrink-0 text-gray-800 text-[18px] font-semibold">${
+        <td class="w-[120px] shrink-0 text-gray-800 text-[18px] font-semibold truncate text-ellipsis white-space: nowrap">${
             item.nameTitle
         }</td>
         <td class="w-[135px] shrink-0">${date}</td>
         <td class="w-[130px] shrink-0">${categoryName}</td>
-        <td class="w-[170px] shrink-0">${content}</td>
+        <td class="w-[170px] shrink-0 truncate text-ellipsis white-space: nowrap">${content}</td>
         <td class="w-[130px] shrink-0">
-              ${item.modificationDate.join(", ")}
+              ${parseDate(content)}
         </td>
         <td class="flex gap-5  w-[130px] shrink-0">
             <div class="flex gap-2">
@@ -148,11 +232,14 @@ const tableActiveList = /*html*/ `
         ${generateTableRows()}
     </tbody>
     </table>
-    <button class="text-gray-800 font-bold text-[18px] border-2 px-3 py-1 rounded-lg border-teal-800 bg-teal-200 hover:bg-teal-800 hover:text-white block mt-4 ml-auto">Create Note</button>
+    <button class="text-gray-800 font-bold text-[18px] border-2 px-3 py-1 rounded-lg border-teal-800 bg-teal-200 hover:bg-teal-800 hover:text-white block mt-4 ml-auto" data-create-note>Create Note</button>
 `;
 
 activeList.innerHTML = tableActiveList;
 const tableBody = activeList.querySelector("tbody");
 tableBody.addEventListener("click", handleBtnClick);
+
+const createNoteBtn = activeList.querySelector("[data-create-note]");
+createNoteBtn.addEventListener("click", handleCreateNoteBtnClick);
 
 export default activeList;
