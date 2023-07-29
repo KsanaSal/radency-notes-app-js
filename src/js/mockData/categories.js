@@ -1,23 +1,28 @@
+import iconListCheck from "../../images/icon-list-check.svg";
+import iconIdea from "../../images/icon-idea.svg";
+import iconRandomThought from "../../images/icon-random-thought.svg";
+import iconQuote from "../../images/icon-quote.svg";
+
 const categories = [
     {
         categoryId: "1",
         categoryName: "Task",
-        categoryImg: require(`../../images/icon-list-check.svg`),
+        categoryImg: iconListCheck,
     },
     {
         categoryId: "2",
         categoryName: "Random Thought",
-        categoryImg: require(`../../images/icon-random-thought.svg`),
+        categoryImg: iconRandomThought,
     },
     {
         categoryId: "3",
         categoryName: "Idea",
-        categoryImg: require(`../../images/icon-idea.svg`),
+        categoryImg: iconIdea,
     },
     {
         categoryId: "4",
         categoryName: "Quote",
-        categoryImg: require(`../../images/icon-quote.svg`),
+        categoryImg: iconQuote,
     },
 ];
 
