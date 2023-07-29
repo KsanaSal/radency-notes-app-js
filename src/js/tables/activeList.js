@@ -4,6 +4,32 @@ import iconDelete from "../../images/icon-delete.svg";
 import iconArchive from "../../images/icon-archived.svg";
 import iconEdit from "../../images/icon-edit.svg";
 
+const handleArchiveBtnClick = (recordId) => {
+    console.log("archive", recordId);
+};
+
+const handleEditBtnClick = (recordId) => {
+    console.log("edit", recordId);
+};
+
+const handleDeleteBtnClick = (recordId) => {
+    console.log("delete", recordId);
+};
+
+const handleBtnClick = (e) => {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+    const recordId =
+        btn.dataset.archive || btn.dataset.edit || btn.dataset.delete;
+    if (btn.dataset.archive) {
+        handleArchiveBtnClick(recordId);
+    } else if (btn.dataset.edit) {
+        handleEditBtnClick(recordId);
+    } else if (btn.dataset.delete) {
+        handleDeleteBtnClick(recordId);
+    }
+};
+
 const generateTableRows = () => {
     let rowsHtml = "";
 
@@ -39,13 +65,19 @@ const generateTableRows = () => {
         </td>
         <td class="flex gap-5  w-[130px] shrink-0">
             <div class="flex gap-2">
-                <button class="hover:shadow-md p-2 hover:bg-teal-100 rounded-[4px]">
+                <button class="hover:shadow-md p-2 hover:bg-teal-100 rounded-[4px]" data-edit=${
+                    item.recordId
+                }>
                     <img src=${iconEdit} alt="Icon edit" width="20" height="20"/>
                 </button>
-                <button class="hover:shadow-md p-2 hover:bg-teal-100 rounded-[4px]">
+                <button class="hover:shadow-md p-2 hover:bg-teal-100 rounded-[4px]" data-archive=${
+                    item.recordId
+                }>
                     <img src=${iconArchive} alt="Icon archive" width="20" height="20"/>
                 </button>
-                <button class="hover:shadow-md p-2 hover:bg-teal-100 rounded-[4px]">
+                <button class="hover:shadow-md p-2 hover:bg-teal-100 rounded-[4px]" data-delete=${
+                    item.recordId
+                }>
                     <img src=${iconDelete} alt="Icon delete" width="20" height="20"/>
                 </button>
             </div>
@@ -101,5 +133,7 @@ const tableActiveList = /*html*/ `
 `;
 
 activeList.innerHTML = tableActiveList;
+const tableBody = activeList.querySelector("tbody");
+tableBody.addEventListener("click", handleBtnClick);
 
 export default activeList;
