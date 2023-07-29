@@ -4,9 +4,16 @@ import iconDelete from "../../images/icon-delete.svg";
 import iconArchive from "../../images/icon-archived.svg";
 import iconEdit from "../../images/icon-edit.svg";
 
-const renderedData = initData.filter((item) => !item.archived);
+let renderedData = initData.filter((item) => !item.archived);
 
 const handleArchiveBtnClick = (recordId) => {
+    const itemToUpdate = initData.find((item) => item.recordId === recordId);
+    if (itemToUpdate) {
+        itemToUpdate.archived = !itemToUpdate.archived;
+        renderedData = initData.filter((item) => !item.archived);
+        const tableBody = activeList.querySelector("tbody");
+        tableBody.innerHTML = generateTableRows();
+    }
     console.log("archive", recordId);
 };
 

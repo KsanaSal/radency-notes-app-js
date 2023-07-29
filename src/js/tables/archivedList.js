@@ -2,7 +2,21 @@ import initData from "../mockData/initData";
 import categories from "../mockData/categories";
 import iconUnarchive from "../../images/icon-unarchived.svg";
 
-const renderedData = initData.filter((item) => item.archived);
+let renderedData = initData.filter((item) => item.archived);
+
+const handleUnarchiveBtnClick = (e) => {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+    const recordId = btn.dataset.unarchive;
+    const itemToUpdate = initData.find((item) => item.recordId === recordId);
+    if (itemToUpdate) {
+        itemToUpdate.archived = !itemToUpdate.archived;
+        renderedData = initData.filter((item) => item.archived);
+        const tableBody = archivedList.querySelector("tbody");
+        tableBody.innerHTML = generateTableRows();
+    }
+    console.log("archive", recordId);
+};
 
 const generateTableRows = () => {
     let rowsHtml = "";
@@ -38,7 +52,7 @@ const generateTableRows = () => {
               ${item.modificationDate.join(", ")}
         </td>
         <td class="flex gap-5  w-[50px] shrink-0">
-                <button class="hover:shadow-md p-2 hover:bg-teal-100 rounded-[4px]" data-archive=${
+                <button class="hover:shadow-md p-2 hover:bg-teal-100 rounded-[4px]" data-unarchive=${
                     item.recordId
                 }>
                     <img src=${iconUnarchive} alt="Icon archive" width="20" height="20"/>
@@ -88,6 +102,9 @@ const tableArchivedList = /*html*/ `
                 ${generateTableRows()}
             </tbody>
         </table>`;
+
 archivedList.innerHTML = tableArchivedList;
+const tableBody = archivedList.querySelector("tbody");
+tableBody.addEventListener("click", handleUnarchiveBtnClick);
 
 export default archivedList;
