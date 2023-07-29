@@ -13,7 +13,6 @@ class EventEmitter {
 
     emit(event, ...args) {
         if (typeof this.events[event] === "object") {
-            console.log("first");
             this.events[event].forEach((listener) => listener(...args));
         }
     }

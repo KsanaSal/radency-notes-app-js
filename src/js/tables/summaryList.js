@@ -1,6 +1,6 @@
 import initData from "../mockData/initData";
 import categories from "../mockData/categories";
-import emitter from "../eventEmitter";
+import emitter from "../../utils/eventEmitter";
 
 const countNotesCategory = (categoryId, archived) =>
     initData.filter(
@@ -46,20 +46,9 @@ const generateTableRows = () => {
 
 const summaryList = document.createElement("section");
 summaryList.classList.add("text-gray-800", "mt-[30px]");
-const tableSummaryList = /*html*/ `
+const tableSummaryList = `
 <h1 class="text-[40px] font-bold">Summary list</h1>
-<table
-            class=' relative
-            flex
-            flex-col
-            rounded-md
-            text-description
-            gap-[10px]
-            text-base
-            font-normal
-            mt-4
-            '
-        >
+<table class=' relative flex flex-col rounded-md text-description gap-[10px] text-base font-normal mt-4'>
             <thead>
                 <tr
                     class=" flex text-left text-[18px] font-semibold py-2 px-4 bg-teal-200 border border-teal-700 rounded-[4px] overflow-hidden shadow-sm hover:shadow-md"
