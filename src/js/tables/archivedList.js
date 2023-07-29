@@ -1,6 +1,7 @@
 import initData from "../mockData/initData";
 import categories from "../mockData/categories";
 import iconUnarchive from "../../images/icon-unarchived.svg";
+import emitter from "../eventEmitter";
 
 let renderedData = initData.filter((item) => item.archived);
 
@@ -11,12 +12,16 @@ const handleUnarchiveBtnClick = (e) => {
     const itemToUpdate = initData.find((item) => item.recordId === recordId);
     if (itemToUpdate) {
         itemToUpdate.archived = !itemToUpdate.archived;
-        renderedData = initData.filter((item) => item.archived);
-        const tableBody = archivedList.querySelector("tbody");
-        tableBody.innerHTML = generateTableRows();
+        emitter.emit("dataChanged");
     }
     console.log("archive", recordId);
 };
+
+emitter.on("dataChanged", () => {
+    renderedData = initData.filter((item) => item.archived);
+    const tableBody = archivedList.querySelector("tbody");
+    tableBody.innerHTML = generateTableRows();
+});
 
 const generateTableRows = () => {
     let rowsHtml = "";

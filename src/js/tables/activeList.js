@@ -3,6 +3,7 @@ import categories from "../mockData/categories";
 import iconDelete from "../../images/icon-delete.svg";
 import iconArchive from "../../images/icon-archived.svg";
 import iconEdit from "../../images/icon-edit.svg";
+import emitter from "../eventEmitter";
 
 let renderedData = initData.filter((item) => !item.archived);
 
@@ -10,12 +11,16 @@ const handleArchiveBtnClick = (recordId) => {
     const itemToUpdate = initData.find((item) => item.recordId === recordId);
     if (itemToUpdate) {
         itemToUpdate.archived = !itemToUpdate.archived;
-        renderedData = initData.filter((item) => !item.archived);
-        const tableBody = activeList.querySelector("tbody");
-        tableBody.innerHTML = generateTableRows();
+        emitter.emit("dataChanged");
     }
     console.log("archive", recordId);
 };
+
+emitter.on("dataChanged", () => {
+    renderedData = initData.filter((item) => !item.archived);
+    const tableBody = activeList.querySelector("tbody");
+    tableBody.innerHTML = generateTableRows();
+});
 
 const handleEditBtnClick = (recordId) => {
     console.log("edit", recordId);
