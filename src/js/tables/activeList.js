@@ -4,6 +4,8 @@ import iconDelete from "../../images/icon-delete.svg";
 import iconArchive from "../../images/icon-archived.svg";
 import iconEdit from "../../images/icon-edit.svg";
 
+const renderedData = initData.filter((item) => !item.archived);
+
 const handleArchiveBtnClick = (recordId) => {
     console.log("archive", recordId);
 };
@@ -33,7 +35,7 @@ const handleBtnClick = (e) => {
 const generateTableRows = () => {
     let rowsHtml = "";
 
-    for (const item of initData) {
+    for (const item of renderedData) {
         const { categoryName, createDate, content } = item;
         const category = categories.find(
             (cat) => cat.categoryId === item.categoryId
@@ -94,8 +96,8 @@ const generateTableRows = () => {
 const activeList = document.createElement("section");
 activeList.classList.add("text-gray-800", "w-full");
 const tableActiveList = /*html*/ `
-  <h1 class="text-[40px] font-bold">Active list</h1>
-  <table class=' relative
+    <h1 class="text-[40px] font-bold">Active list</h1>
+    <table class=' relative
     flex
     flex-col
     rounded-md
@@ -104,9 +106,9 @@ const tableActiveList = /*html*/ `
     text-base
     font-normal
     mt-4
-  '>
+    '>
     <thead>
-      <tr class=" flex justify-between text-left text-[20px] font-semibold py-4 px-2 bg-teal-200 border border-teal-700 rounded-[4px] overflow-hidden shadow-sm hover:shadow-md">
+        <tr class=" flex justify-between text-left text-[20px] font-semibold py-4 px-2 bg-teal-200 border border-teal-700 rounded-[4px] overflow-hidden shadow-sm hover:shadow-md">
         <th class="w-[55px] shrink-0"></th>
         <th class="w-[130px] shrink-0">Name</th>
         <th class="w-[135px] shrink-0">Created</th>
@@ -123,13 +125,13 @@ const tableActiveList = /*html*/ `
                 </div>
             </div>
         </th>
-      </tr>
+        </tr>
     </thead>
     <tbody class="flex flex-col gap-[10px] text-gray-600">
-      ${generateTableRows()}
+        ${generateTableRows()}
     </tbody>
-  </table>
-  <button class="text-gray-800 font-bold text-[18px] border-2 px-3 py-1 rounded-lg border-teal-800 bg-teal-200 hover:bg-teal-800 hover:text-white block mt-4 ml-auto">Create Note</button>
+    </table>
+    <button class="text-gray-800 font-bold text-[18px] border-2 px-3 py-1 rounded-lg border-teal-800 bg-teal-200 hover:bg-teal-800 hover:text-white block mt-4 ml-auto">Create Note</button>
 `;
 
 activeList.innerHTML = tableActiveList;
