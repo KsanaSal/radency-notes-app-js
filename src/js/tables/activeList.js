@@ -13,7 +13,6 @@ const handleArchiveBtnClick = (recordId) => {
         itemToUpdate.archived = !itemToUpdate.archived;
         emitter.emit("dataChanged");
     }
-    console.log("archive", recordId);
 };
 
 emitter.on("dataChanged", () => {
@@ -27,7 +26,13 @@ const handleEditBtnClick = (recordId) => {
 };
 
 const handleDeleteBtnClick = (recordId) => {
-    console.log("delete", recordId);
+    const itemDeleteByIndex = initData.findIndex(
+        (item) => item.recordId === recordId
+    );
+    if (itemDeleteByIndex !== -1) {
+        initData.splice(itemDeleteByIndex, 1);
+        emitter.emit("dataChanged");
+    }
 };
 
 const handleBtnClick = (e) => {

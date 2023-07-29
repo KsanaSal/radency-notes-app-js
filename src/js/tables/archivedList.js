@@ -14,7 +14,6 @@ const handleUnarchiveBtnClick = (e) => {
         itemToUpdate.archived = !itemToUpdate.archived;
         emitter.emit("dataChanged");
     }
-    console.log("archive", recordId);
 };
 
 emitter.on("dataChanged", () => {
